@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+    <title>NickNameGetBR/SetBy应用示例</title>
+    <style>
+        .flyingGrid table
+        {
+            font-size: 13px;
+            cursor: pointer;
+            border-collapse: collapse;
+        }
+        .flyingGrid td, th
+        {
+            padding-left: 3px;
+            padding-right: 3px;
+            border: 1px solid #5e94f2;
+            height: 26px;
+        }
+        .flyingGrid tr input[type="checkbox"]
+        {
+            width: 20px;
+        }
+        .flyingGrid tr:nth-child(even)
+        {
+            background-color: #e4ebf7;
+        }
+    </style>
+    <script src="jquery-1.10.1.js" type="text/javascript"></script>
+    <script src="NickName.js" type="text/javascript"></script>
+    <script type="text/javascript" language="javascript">
+        $(document).ready(function () {
+            $("#butset").click(setvalue);
+            $("#butget").click(getvalue);
+
+            $("#butreload").click(function(){window.location.reload(); })
+        });
+        function setvalue() {
+            var data = {};
+            data.UserId = "8888";
+            data.UserName = "赵六";
+            data.School="湖北工业大学";
+            data.schoolNo=100002;
+            data.Age=23;
+
+            //通过name属性设置表格第3行的值
+            $("#thirdTr").NickNameSetBy("name",data).css({"background-color":"#EEA9B8"});
+            $("#result").html("<pre>setvalue"+JSON.stringify(data,null,"  ")+"</pre>");
+        };
+
+        function getvalue() {
+            var jsonData = $("#thirdTr").NickNameGetBy("name");//取值
+            $("#result").html("<pre>getvlue"+JSON.stringify(jsonData,null,"  ")+"</pre>");
+        };
+    </script>
+</head>
+<body>
+<div id="testGrid" class="flyingGrid">
+    <table id="tableTest">
+        <tbody>
+        <tr align="center">
+            <th width="110px">编号</th>
+            <th width="110px">姓名</th>
+            <th width="110px">年龄</th>
+            <th width="110px">学校</th>
+            <th width="110px">学号</th>
+        </tr>
+        <tr id="firstTr">
+            <td name="UserId">2344</td>
+            <td name="UserName">张三</td>
+            <td name="Age">15</td>
+            <td name="School">武汉大学</td>
+            <td name="NO"><input value="100000" type="text" /></td>
+        </tr>
+        <tr id="secondTr">
+            <td name="UserId">7899</td>
+            <td name="UserName">李四</td>
+            <td name="Age">16</td>
+            <td name="School">华中科技大学</td>
+            <td name="NO"><input value="100001" type="text" /></td>
+        </tr>
+        <tr id="thirdTr">
+            <td name="UserId" type="td">9885</td>
+            <td name="UserName" type="td">王五</td>
+            <td name="Age" type="td">17</td>
+            <td name="School" type="td">华中师范大学</td>
+            <td name="NO"><input name="schoolNo" value="100002" type="text" /></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<input id="butset" type="button" value="NickName Set" />
+<input id="butget" type="button" value="NickName Get" />
+<input id="butreload" type="button" value="Reload thi page" /><br/>
+<div id="result"></div>
+</body>
+</html>

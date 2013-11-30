@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+        <style type="text/css">
+            .dis{border: 1px solid #999; width: 350px;height:570px; padding: 15px; background: #eee;float: left;}
+        </style>
+        <script src="jquery-1.10.1.js" type="text/javascript"></script>
+        <script src="NickName.js" type="text/javascript"></script>
+        <script type="text/javascript" language="javascript">
+            $(document).ready(function () {
+                $("#butset").click(setvalue);
+                $("#butget").click(getvalue);
+
+                $("#butreload").click(function(){window.location.reload(); })
+            });
+            function setvalue() {
+                //该值可能从服务端请求
+                var jsonData = {};
+                jsonData.nickbutton = "有值";
+                jsonData.nickreset = "有值";
+                jsonData.nickinsubmit="有值";
+                jsonData.nicktext = "有值";
+                jsonData.nickdiv = "有值";
+                jsonData.nickimg = "http://www.baidu.com/img/logo-yy.gif";
+                jsonData.nickpassword="有值";
+                jsonData.nickcheckbox=[{chk:false,val:1},{chk:true,val:2}];
+                jsonData.nickradio=[{chk:false,val:1},{chk:true,val:2}];
+                jsonData.nickhidden="有值";
+                jsonData.nicktextarea="有值";
+                jsonData.nicka={href:"http://www.sina.com.cn/",text:"我是www.sina.com"};
+                jsonData.nickp="有值";
+                jsonData.nicktd="有值";
+                jsonData.nickspan="有值";
+
+                //使用nickName把值渲染到各个元素
+                $("#namespace").NickNameSet(jsonData);
+                $("#result").html("<pre> set"+JSON.stringify(jsonData,null,"  ")+"</pre>");
+            };
+            function getvalue() {
+                
+                //使用nick获取元素的值并返回一个object
+                var jsonData = $("#namespace").NickNameGet();
+                $("#result").html("<pre>get"+JSON.stringify(jsonData,null,"  ")+"</pre>");
+
+            };
+        </script>
+        <title>nickName页面级OTM</title>
+    </head>
+<body>
+    <div class="dis" id="namespace" >
+        p段落 <p nickname="nickp"  type="p">无值</p>
+        a超链接<a href="#" nickname="nicka" type="a">无值</a><br/><br/>
+        button按钮<input nickname="nickbutton" type="button" value="无值" /><br/>
+        reset复位<input nickname="nickreset" type="reset" value="无值" /><br/>
+        submit提交 <input  nickname="nickinsubmit" type="submit" value="无值" /><br/>
+        text文本框<input nickname="nicktext" type="text" value="无值" /><br/>
+        password密码框<input nickname="nickpassword" type="password" value="无值" /><br/>
+        checkbox复习框组<input  name="box" nickname="nickcheckbox" type="checkbox" value="男" />
+        <input  name="box" nickname="nickcheckbox" type="checkbox" value="女" /><br/>
+        radio单选框组 <input  name="rid" nickname="nickradio" type="radio" />
+        <input  name="rid" nickname="nickradio" type="radio" /><br/>
+        hidden隐藏域<input  nickname="nickhidden" type="hidden" value="无值" /><br/><br/>
+        textarea多行文本域<textarea nickname="nicktextarea" cols="20" rows="2" type="textarea">无值</textarea><br/><br/>
+        img图片 <img  nickname="nickimg" type="image" alt="" src="" /><br/>
+        div块<div nickname="nickdiv" type="div" >无值</div><br/>
+        span文本<span  nickname="nickspan" type="span">无值</span><br/>
+        td,th表格单元格<table><tr><td nickname="nicktd" type="td">无值</td></tr></table>
+        <br/>
+        <input id="butset" type="button" value="NickName Set" />
+        <input id="butget" type="button" value="NickName Get" />
+        <input id="butreload" type="button" value="Reload thi page" /><br/>
+        <br/>
+    </div>
+    <div class="dis"  id="result"></div>
+</body>
+</html>
